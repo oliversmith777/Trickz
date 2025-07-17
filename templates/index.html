@@ -6,7 +6,29 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="h-screen bg-gray-900 text-gray-200 flex flex-col items-center justify-center">
+  <!-- Flash messages toast -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="fixed top-4 right-4 z-50 space-y-2">
+        {% for category, message in messages %}
+          <div class="max-w-sm p-4 rounded-lg shadow-lg border {% if category == 'error' %}bg-red-900 border-red-700 text-red-200{% else %}bg-green-900 border-green-700 text-green-200{% endif %}">
+            <div class="flex items-center">
+              <span class="mr-2">
+                {% if category == 'error' %}❌{% else %}✅{% endif %}
+              </span>
+              <p class="text-sm">{{ message }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
   <h1 class="text-4xl font-semibold mb-4">TrickSense</h1>
-  <p>🚀 Flask skeleton is running.</p>
-</body>
-</html>
+  <p class="mb-6">🚀 Upload and analyze your trick videos</p>
+
+  <a href="{{ url_for('upload') }}" 
+     class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-lg font-medium transition-colors">
+    Upload Video
+  </a>
+</body></html>

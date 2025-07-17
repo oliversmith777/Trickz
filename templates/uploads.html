@@ -1,6 +1,28 @@
-{% extends "index.html" %}
-
-{% block body %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Upload - TrickSense</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen bg-gray-900 text-gray-200 flex flex-col items-center justify-center">
+  <!-- Flash messages toast -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="fixed top-4 right-4 z-50 space-y-2">
+        {% for category, message in messages %}
+          <div class="max-w-sm p-4 rounded-lg shadow-lg border {% if category == 'error' %}bg-red-900 border-red-700 text-red-200{% else %}bg-green-900 border-green-700 text-green-200{% endif %}">
+            <div class="flex items-center">
+              <span class="mr-2">
+                {% if category == 'error' %}❌{% else %}✅{% endif %}
+              </span>
+              <p class="text-sm">{{ message }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
 <div class="max-w-md w-full bg-gray-800/60 backdrop-blur p-6 rounded-xl shadow">
   <h2 class="text-xl font-semibold mb-4">Upload a Trick</h2>
 
@@ -31,5 +53,11 @@
       Upload 🚀
     </button>
   </form>
+
+  <a href="{{ url_for('index') }}" 
+     class="block text-center mt-4 text-gray-400 hover:text-gray-200 transition-colors">
+    ← Back to Home
+  </a>
 </div>
-{% endblock %}
+</body>
+</html>
