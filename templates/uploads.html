@@ -29,15 +29,19 @@
   <form action="{{ url_for('upload') }}" method="POST"
         enctype="multipart/form-data" class="space-y-4">
 
-    <!-- Trick dropdown -->
+    <!-- Trick selection with search -->
     <label class="block">
-      <span class="mb-1">Trick you’re attempting</span>
-      <select name="trick"
-              class="w-full bg-gray-900 border border-gray-700 p-2 rounded">
-        {% for t in tricks %}
-          <option value="{{ t }}">{{ t|capitalize }}</option>
-        {% endfor %}
-      </select>
+      <span class="mb-1">Trick you're attempting</span>
+      <div class="relative">
+        <input type="text" id="trick-search" placeholder="Search tricks..." 
+               class="w-full bg-gray-900 border border-gray-700 p-2 rounded mb-2">
+        <select name="trick" id="trick-select"
+                class="w-full bg-gray-900 border border-gray-700 p-2 rounded" size="6">
+          {% for t in tricks %}
+            <option value="{{ t }}">{{ t|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
     </label>
 
     <!-- Video picker -->
@@ -72,6 +76,26 @@
         uploadArea.classList.remove('border-green-500', 'bg-green-900/20');
         uploadArea.classList.add('border-gray-600');
         uploadBtn.textContent = 'Upload 🚀';
+      }
+    });
+
+    // Trick Search Functionality
+    const trickSearch = document.getElementById('trick-search');
+    const trickSelect = document.getElementById('trick-select');
+
+    trickSearch.addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const options = trickSelect.options;
+
+      for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+        const trickName = option.text.toLowerCase();
+
+        if (trickName.includes(searchTerm)) {
+          option.style.display = 'block';
+        } else {
+          option.style.display = 'none';
+        }
       }
     });
   </script>
