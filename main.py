@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
-from analysis import analyze_clip
+from analysis import analyze_clip, TRICKS
 
 app = Flask(__name__, template_folder="templates")
 app.secret_key = "dev"                  # enables flash messages
@@ -9,7 +9,6 @@ app.secret_key = "dev"                  # enables flash messages
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTS  = {"mp4", "mov", "m4v"}
 MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB limit
-TRICKS        = ["180", "360", "backflip", "frontflip"]   # starter list
 
 def allowed_file(filename):
     """Check if file has an allowed extension."""
