@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block body %}
+<div class="max-w-md w-full bg-gray-800/60 backdrop-blur p-6 rounded-xl shadow">
+  <h2 class="text-xl font-semibold mb-4">Upload a Trick</h2>
+
+  <form action="{{ url_for('upload') }}" method="POST"
+        enctype="multipart/form-data" class="space-y-4">
+
+    <!-- Trick dropdown -->
+    <label class="block">
+      <span class="mb-1">Trick you’re attempting</span>
+      <select name="trick"
+              class="w-full bg-gray-900 border border-gray-700 p-2 rounded">
+        {% for t in tricks %}
+          <option value="{{ t }}">{{ t|capitalize }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <!-- Video picker -->
+    <label class="flex flex-col items-center justify-center
+                  border-2 border-dashed border-gray-600 p-6 rounded
+                  cursor-pointer hover:bg-gray-800">
+      <span class="mb-2">Tap to choose/record a video</span>
+      <input type="file" name="file" accept="video/*"
+             capture="environment" class="hidden" required>
+    </label>
+
+    <button class="w-full bg-indigo-600 hover:bg-indigo-500 py-2 rounded">
+      Upload 🚀
+    </button>
+  </form>
+</div>
+{% endblock %}

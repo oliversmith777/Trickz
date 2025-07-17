@@ -1,0 +1,42 @@
+Project Context (read this first)
+• App name: TrickSense – a mobile-first web app that lets users upload short trick videos (ski, trampoline, etc.) and will later analyze them.
+• Tech stack so far:
+– Python 3.10 + Flask 3 (back-end & simple server-side rendering)
+– Tailwind CDN for styling.
+– Folder structure:
+main.py requirements.txt templates/ ├─ index.html └─ upload.html # new form static/ └─ uploads/ # git-ignored, stores videos .gitignore # ignores venv, pycache, static/uploads
+• Remote repo: https://github.com/oliversmith777/Trickz (origin/main already set).
+• Run command: python3 main.py (configured in .replit).
+• Mobile goal: eventually wrap the web app with Capacitor/Ionic for App Store release, so keep UI touch-friendly and API endpoints clean.
+
+Current app state
+
+/ route renders index.html with a link to an upload page.
+
+/upload route (GET/POST) is partly stubbed:
+– Saves a valid .mp4/.mov/.m4v to static/uploads/.
+– TODO: call an analysis() function (not implemented yet).
+– Uses flash() to confirm success, then redirects to /.
+
+How I want you (Replit AI) to help
+
+Generate focused code directly into the open file (no full rewrites unless asked).
+
+Follow these coding guidelines:
+– Keep new features in small, testable chunks (<150 LOC).
+– Use os.path.join for file paths; no hard-coding /.
+– Any new Python deps → append to requirements.txt.
+– Don’t commit large binary files; respect .gitignore.
+
+For every generated block, add concise comments + docstrings.
+
+After inserting code, list the manual steps I need (e.g., “Run pip install ..., stage & push”).
+
+If a change has mobile implications (camera perms, large uploads), warn me in a short note.
+
+Next up
+– Task 1 (today): finish the /upload route stub → move file-type validation into a helper, add 10 MB size limit, and display flash messages in a Tailwind toast on the homepage.
+– Task 2 (optional, later): create an analysis.py stub with a dummy function that returns { "score": 0 } for every upload.
+
+Begin with Task 1 now.
+Insert the code where it belongs, then list any steps I need to run or commit.
