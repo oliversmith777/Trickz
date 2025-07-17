@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
+from analysis import analyze_clip
 
 app = Flask(__name__, template_folder="templates")
 app.secret_key = "dev"                  # enables flash messages
@@ -48,9 +49,8 @@ def upload():
         path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(path)
 
-        # TODO: call analysis() later
-        flash(f"Successfully uploaded {file.filename} for trick {trick}!", "success")
-        return redirect(url_for("index"))
+        result = analyze_clip(path, trick)
+        return render_template("result.html", filename=file.filename, trick=trick, score=result["score"], tips=result["suggestions"])
 
     # GET request → show the form
     return render_template("uploads.html", tricks=TRICKS)

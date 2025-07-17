@@ -1,0 +1,18 @@
+
+{% extends "index.html" %}  
+{% block body %}  
+<div class="max-w-md w-full bg-gray-800/60 backdrop-blur p-6 rounded-xl">  
+  <h2 class="text-xl font-semibold mb-4">{{ trick|capitalize }} – Score:  
+    <span class="text-3xl text-indigo-400 font-bold">{{ score }}</span></h2>  
+  <video class="w-full mb-4 rounded" controls  
+         src="{{ url_for('static', filename='uploads/' + filename) }}"></video>  
+  <h3 class="font-semibold mb-2">Suggestions</h3>  
+  <ul class="list-disc pl-5 space-y-1">  
+    {% for tip in tips %}  
+      <li>{{ tip }}</li>  
+    {% endfor %}  
+  </ul>  
+  <a href="{{ url_for('upload') }}"  
+     class="inline-block mt-6 underline text-indigo-400">Upload another →</a>  
+</div>  
+{% endblock %}
