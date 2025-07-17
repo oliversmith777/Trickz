@@ -43,16 +43,38 @@
     <!-- Video picker -->
     <label class="flex flex-col items-center justify-center
                   border-2 border-dashed border-gray-600 p-6 rounded
-                  cursor-pointer hover:bg-gray-800">
-      <span class="mb-2">Tap to choose/record a video</span>
+                  cursor-pointer hover:bg-gray-800" id="upload-area">
+      <span class="mb-2" id="upload-text">Tap to choose/record a video</span>
       <input type="file" name="file" accept="video/*"
-             class="hidden" required>
+             class="hidden" required id="file-input">
     </label>
 
-    <button class="w-full bg-indigo-600 hover:bg-indigo-500 py-2 rounded">
+    <button class="w-full bg-indigo-600 hover:bg-indigo-500 py-2 rounded" id="upload-btn">
       Upload 🚀
     </button>
   </form>
+
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const uploadText = document.getElementById('upload-text');
+    const uploadArea = document.getElementById('upload-area');
+    const uploadBtn = document.getElementById('upload-btn');
+
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        uploadText.textContent = `Selected: ${file.name}`;
+        uploadArea.classList.add('border-green-500', 'bg-green-900/20');
+        uploadArea.classList.remove('border-gray-600');
+        uploadBtn.textContent = 'Upload Video 🚀';
+      } else {
+        uploadText.textContent = 'Tap to choose/record a video';
+        uploadArea.classList.remove('border-green-500', 'bg-green-900/20');
+        uploadArea.classList.add('border-gray-600');
+        uploadBtn.textContent = 'Upload 🚀';
+      }
+    });
+  </script>
 
   <a href="{{ url_for('index') }}" 
      class="block text-center mt-4 text-gray-400 hover:text-gray-200 transition-colors">
