@@ -7,7 +7,7 @@ app.secret_key = "dev"                  # enables flash messages
 # -------- upload settings --------
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTS  = {"mp4", "mov", "m4v"}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB limit
+MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB limit
 TRICKS        = ["180", "360", "backflip", "frontflip"]   # starter list
 
 def allowed_file(filename):
